@@ -18,14 +18,18 @@ def load_pil_imgs(dataset):
     visual_tool.visualize_using_tensor()
     visual_tool.visualize_img()
 
-def load_tensor_img(data_loader):
+def load_tensor_img(data_loader, epoch=1, title="", is_clean=False):
     visual_tool = Visualize(log_dir="dataloader")
-    for epoch in range(2):
+    for epoch in range(epoch):
         for data in data_loader:
             img, target = data
-            visual_tool.tensor_origin(f"Test_data_Epoch_shuffle {epoch}", img)
+            visual_tool.tensor_origin(f"{title} {epoch}", img)
 
-    visual_tool.visualize_img(multi_img=True, is_clean=True)
+    visual_tool.visualize_img(multi_img=True, is_clean=is_clean)
+
+def load_tensor_graph(model, sequence, title="", is_clean=False):
+    visual_tool = Visualize(log_dir="graph")
+    visual_tool.visualize_graph(model, sequence, is_clean=is_clean)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
